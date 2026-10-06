@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Primus Carretas | Escolha a cor do seu barco</title>
+<meta name="description" content="Escolha a cor da sua embarcação e solicite orçamento da carreta Primus Carretas em Marialva – PR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ouro:#d9a441;--ouro2:#f2c46d;--preto:#0a0a0a;--cinza:#151515;--txt:#f4f1ea;--mut:#a9a395}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--preto);color:var(--txt);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+header{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 5vw 14px;background:linear-gradient(#000c,#0000);backdrop-filter:blur(6px)}
+.brand{display:flex;align-items:center;gap:10px;font:600 20px Oswald,sans-serif;letter-spacing:.12em;color:var(--ouro);text-decoration:none}
+.brand img{height:40px;width:auto;display:block}
+.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--ouro2),var(--ouro));color:#111;font:600 15px Inter;padding:14px 26px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px #d9a44155}
+.btn.sm{padding:10px 20px;font-size:14px}
+section{padding:110px 5vw 70px;max-width:1280px;margin:auto}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;min-height:100vh}
+.tag{color:var(--ouro);font:500 13px Inter;letter-spacing:.3em;text-transform:uppercase}
+h1{font:700 clamp(36px,5vw,64px)/1.05 Oswald,sans-serif;text-transform:uppercase;margin:14px 0 18px}
+h1 span{color:var(--ouro)}
+p.lead{color:var(--mut);max-width:520px;margin-bottom:28px}
+.stage{position:relative;border-radius:22px;overflow:hidden;border:1px solid #d9a44133;box-shadow:0 30px 80px #000a;aspect-ratio:1290/1162;background:#000}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .7s ease,transform 1.2s ease}
+.stage img.on{opacity:1;transform:scale(1)}
+.badge{position:absolute;left:16px;bottom:16px;background:#000a;backdrop-filter:blur(8px);border:1px solid #d9a44155;padding:8px 16px;border-radius:999px;font:500 14px Inter}
+.badge b{color:var(--ouro)}
+.cores{display:flex;gap:16px;margin:8px 0 28px}
+.sw{width:54px;height:54px;border-radius:50%;border:3px solid #2a2a2a;cursor:pointer;position:relative;transition:transform .25s,border-color .25s,box-shadow .25s;outline:none}
+.sw:hover{transform:scale(1.14)}
+.sw.on{border-color:var(--ouro2);box-shadow:0 0 0 4px #d9a44133,0 0 24px #d9a44166;transform:scale(1.1)}
+.sw:focus-visible{border-color:#fff}
+.lbl{font:500 13px Inter;color:var(--mut);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.lbl b{color:var(--ouro);font-weight:600}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+.card{background:var(--cinza);border:1px solid #ffffff12;border-radius:16px;padding:26px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:#d9a44166}
+.card h3{font:600 20px Oswald;color:var(--ouro);margin-bottom:8px;letter-spacing:.04em}
+.card p{color:var(--mut);font-size:15px}
+h2{font:700 clamp(28px,3.5vw,44px) Oswald;text-transform:uppercase}
+.cta{text-align:center;background:radial-gradient(circle at 50% 0,#d9a44122,transparent 60%);border-radius:24px;margin:30px 5vw 60px;padding:70px 20px;border:1px solid #d9a44122}
+.cta p{color:var(--mut);margin:12px 0 28px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 5vw 50px;border-top:1px solid #ffffff10}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140%);z-index:20;background:#111;border:1px solid var(--ouro);border-radius:18px;padding:14px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 16px 50px #000b;transition:transform .45s cubic-bezier(.2,.9,.3,1);width:max-content;max-width:92vw;font-size:14px}
+.toast.on{transform:translate(-50%,0)}
+.toast button{background:none;border:1px solid #ffffff33;color:var(--txt);border-radius:999px;padding:7px 14px;font:500 13px Inter;cursor:pointer}
+.toast .bar{position:absolute;left:0;bottom:0;height:3px;background:var(--ouro);border-radius:0 0 18px 18px;width:100%;transform-origin:left}
+.toast.on .bar{animation:cd 3s linear forwards}
+@keyframes cd{to{transform:scaleX(0)}}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:100px;gap:28px}.hero .stage{order:-1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#topo"><img src="logo.png" alt="Primus Carretas" onerror="this.remove()"><span id="brandTxt">PRIMUS CARRETAS</span></a>
+  <a class="btn sm" id="ctaTop" href="#" target="_blank" rel="noopener">Fazer orçamento</a>
+</header>
+
+<section class="hero" id="topo">
+  <div>
+    <div class="tag rv">Excelência que transporta</div>
+    <h1 class="rv d1">Escolha a cor do <span>seu barco</span></h1>
+    <p class="lead rv d2">Veja como sua embarcação fica em cada cor e peça o orçamento da carreta Primus, com fabricação própria em Marialva – PR.</p>
+    <div class="rv d3">
+      <div class="lbl">Cor selecionada: <b id="nomeCor">Azul</b></div>
+      <div class="cores" role="radiogroup" aria-label="Cor do barco">
+        <button class="sw" role="radio" data-cor="azul" aria-label="Azul" style="background:radial-gradient(circle at 30% 30%,#4a74e8,#14308f)"></button>
+        <button class="sw" role="radio" data-cor="amarelo" aria-label="Amarelo" style="background:radial-gradient(circle at 30% 30%,#ffe45c,#c9a000)"></button>
+        <button class="sw" role="radio" data-cor="vermelho" aria-label="Vermelho" style="background:radial-gradient(circle at 30% 30%,#ff5252,#8f0b0b)"></button>
+        <button class="sw" role="radio" data-cor="preto" aria-label="Preto" style="background:radial-gradient(circle at 30% 30%,#555,#050505)"></button>
+      </div>
+      <a class="btn" id="ctaMain" href="#" target="_blank" rel="noopener">Fazer orçamento da cor <span id="cta2">azul</span> →</a>
+    </div>
+  </div>
+  <div class="stage rv d2" id="stage">
+    <img data-cor="azul" src="img/barco-azul.jpg" alt="Barco Proboat 600 azul na carreta Primus">
+    <img data-cor="amarelo" src="img/barco-amarelo.jpg" alt="Barco Proboat 600 amarelo na carreta Primus">
+    <img data-cor="vermelho" src="img/barco-vermelho.jpg" alt="Barco Proboat 600 vermelho na carreta Primus">
+    <img data-cor="preto" src="img/barco-preto.jpg" alt="Barco Proboat 600 preto na carreta Primus">
+    <div class="badge">Proboat 600 · <b id="badgeCor">Azul</b></div>
+  </div>
+</section>
+
+<section>
+  <div class="tag rv">Carreta Primus</div>
+  <h2 class="rv d1">Feita para levar seu barco com segurança</h2>
+  <div class="info">
+    <div class="card rv"><h3>Estrutura reforçada</h3><p>Feixe de molas reforçados, cubo e amortecedores novos para rodar firme.</p></div>
+    <div class="card rv d1"><h3>Pneus novos</h3><p>Rodagem nova e roda de apoio dianteira para facilitar o manuseio.</p></div>
+    <div class="card rv d2"><h3>Engate automático</h3><p>Praticidade no engate, com correntes de segurança.</p></div>
+    <div class="card rv d3"><h3>Iluminação e sinalização</h3><p>Equipada conforme a necessidade para trafegar com tranquilidade.</p></div>
+  </div>
+</section>
+
+<div class="cta rv">
+  <h2>Gostou da cor <span style="color:var(--ouro)" id="cta3">azul</span>?</h2>
+  <p>Fale com a Primus Carretas e receba seu orçamento pelo WhatsApp.</p>
+  <a class="btn" id="ctaBottom" href="#" target="_blank" rel="noopener">Fazer orçamento</a>
+</div>
+
+<div class="toast" id="toast" role="status"><span>Abrindo o WhatsApp com a cor <b id="toastCor" style="color:var(--ouro)"></b>…</span><button id="toastCancel">Cancelar</button><div class="bar"></div></div>
+<footer>Primus Carretas · Marialva – PR · (44) 99914-9765<br>As cores exibidas são ilustrativas.</footer>
+
+<script>
+const NUM='5544999149765';
+const nomes={azul:'Azul',amarelo:'Amarelo',vermelho:'Vermelho',preto:'Preto'};
+const sws=[...document.querySelectorAll('.sw')],imgs=[...document.querySelectorAll('.stage img')];
+function link(c){return 'https://wa.me/'+NUM+'?text='+encodeURIComponent('Olá! Vim pelo site da Primus Carretas e gostaria de um orçamento para a carreta do barco Proboat 600 na cor '+nomes[c].toLowerCase()+'.')}
+function setCor(c){
+  sws.forEach(s=>{const on=s.dataset.cor===c;s.classList.toggle('on',on);s.setAttribute('aria-checked',on)});
+  imgs.forEach(i=>i.classList.toggle('on',i.dataset.cor===c));
+  nomeCor.textContent=badgeCor.textContent=nomes[c];
+  cta2.textContent=cta3.textContent=nomes[c].toLowerCase();
+  ['ctaTop','ctaMain','ctaBottom'].forEach(id=>document.getElementById(id).href=link(c));
+}
+let timer=null;
+function parar(){clearTimeout(timer);timer=null;toast.classList.remove('on')}
+function escolher(c){
+  setCor(c);parar();toastCor.textContent=nomes[c].toLowerCase();
+  void toast.offsetWidth;toast.classList.add('on');
+  timer=setTimeout(()=>{window.location.href=link(c)},3000);
+}
+sws.forEach(s=>s.addEventListener('click',()=>escolher(s.dataset.cor)));
+toastCancel.addEventListener('click',parar);
+setCor('azul');
+// logo oficial: se logo.png existir, esconde o texto
+const lg=document.querySelector('.brand img');
+lg.addEventListener('load',()=>brandTxt.style.display='none');
+// animações de scroll
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// leve parallax na imagem
+const st=document.getElementById('stage');
+st.addEventListener('mousemove',e=>{const r=st.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;st.style.transform=`perspective(900px) rotateY(${x*4}deg) rotateX(${-y*4}deg)`});
+st.addEventListener('mouseleave',()=>st.style.transform='');
+</script>
+</body>
+</html>
